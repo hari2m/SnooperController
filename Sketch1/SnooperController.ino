@@ -1,8 +1,9 @@
 int Forward = 2;
-int Backward = 2;
-int Left = 2;
-int Right = 2;
+int Backward = 4;
+int Left = 7;
+int Right = 8;
 int pin13 = 13;
+int initial = 1;
 
 void setup() {
 	pinMode(Forward, OUTPUT);
@@ -14,29 +15,34 @@ void setup() {
 }
 void loop() {
 	if (Serial.available() > 0) {
-		String data = Serial.readString();
-		if (data == "0")
+		int data = Serial.read();
+		if (data == 0) {
 			digitalWrite(Forward, HIGH);
-		else if (data == "1")
+			digitalWrite(pin13, LOW);
+		}
+		if (data == 1) {
+			digitalWrite(pin13, HIGH);
 			digitalWrite(Forward, LOW);
-		else if (data == "2")
-			digitalWrite(Backward, HIGH); 
-		else if (data == "3")
+		}
+		else if (data == 2) {
+			digitalWrite(Backward, HIGH);
+		}
+		else if (data == 3)
 			digitalWrite(Backward, LOW);
-		else if (data == "4")
+		else if (data == 4)
 			digitalWrite(Left, HIGH);
-		else if (data == "5")
+		else if (data == 5)
 			digitalWrite(Left, LOW);
-		else if (data == "6")
+		else if (data == 6)
 			digitalWrite(Right, HIGH);
-		else if (data == "7")
+		else if (data == 7)
 			digitalWrite(Right, LOW);
 		else {
-			digitalWrite(Forward, HIGH);
+			/*digitalWrite(Forward, HIGH);
 			digitalWrite(Backward, HIGH);
 			digitalWrite(Left, HIGH);
-			digitalWrite(Right, HIGH);
-			digitalWrite(pin13, !digitalRead(pin13));
+			digitalWrite(Right, HIGH);*/
+			digitalWrite(pin13, HIGH);
 		}
 	}
 }
