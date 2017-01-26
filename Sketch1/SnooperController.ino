@@ -14,14 +14,19 @@ void setup() {
 	Serial.begin(9600);
 }
 void loop() {
+	if (initial == 1) {
+		digitalWrite(Forward, HIGH);
+		digitalWrite(Backward, HIGH);
+		digitalWrite(Left, HIGH);
+		digitalWrite(Right, HIGH);
+		initial++;
+	}
 	if (Serial.available() > 0) {
 		int data = Serial.read();
 		if (data == 0) {
 			digitalWrite(Forward, HIGH);
-			digitalWrite(pin13, LOW);
 		}
 		if (data == 1) {
-			digitalWrite(pin13, HIGH);
 			digitalWrite(Forward, LOW);
 		}
 		else if (data == 2) {
